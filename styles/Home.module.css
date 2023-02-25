@@ -3,40 +3,29 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 6rem;
+  padding: 20px;
   min-height: 100vh;
   background: linear-gradient(
     to bottom,
-    rgba(var(--background-start-rgb), 1),
-    rgba(var(--callout-rgb), 0.7)
-  ), url(../public/space-bg.jpg) no-repeat center center fixed;
+    rgba(var(--background-start-rgb), 0.8),
+    rgba(var(--callout-rgb), 0.5)
+  ), url(/_next/static/media/space-bg.60132f90.jpg) no-repeat center center fixed;
 }
 
-.description {
-  display: inherit;
-  justify-content: inherit;
-  align-items: inherit;
-  font-size: 0.85rem;
-  max-width: var(--max-width);
-  width: 100%;
-  z-index: 2;
-  font-family: var(--font-mono);
-}
-
-.description a {
+.header {
   display: flex;
-  justify-content: center;
+  width: 100%;
+  height: 60px;
   align-items: center;
-  gap: 0.5rem;
 }
 
-.description p {
-  position: relative;
-  margin: 0;
-  padding: 1rem;
-  background-color: rgba(var(--callout-rgb), 0.5);
-  border: 1px solid rgba(var(--callout-border-rgb), 0.3);
-  border-radius: var(--border-radius);
+.footer {
+  height: 140px;
+}
+
+.logo {
+  height: 30px;
+  width: 140px;
 }
 
 .code {
@@ -44,42 +33,22 @@
   font-family: var(--font-mono);
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(25%, auto));
-  width: var(--max-width);
-  max-width: 100%;
-}
 
-.card {
-  padding: 1rem 1.2rem;
-  border-radius: var(--border-radius);
-  background: rgba(var(--card-rgb), 0);
-  border: 1px solid rgba(var(--card-border-rgb), 0);
-  transition: background 200ms, border 200ms;
-}
-
-.card span {
-  display: inline-block;
-  transition: transform 200ms;
-}
-
-.card h2 {
+.question {
+  font-size: 2.3em;
   font-weight: 600;
-  margin-bottom: 0.7rem;
+  margin-bottom: 0.5rem;
+  color: white;
+  margin-bottom: 32px;
 }
 
 .center {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   position: relative;
   padding: 4rem 0 4rem;
-}
-
-.logo,
-.thirteen {
-  position: relative;
 }
 
 /* Enable hover only on non-touch devices */
@@ -219,8 +188,9 @@
   border: none;
   background: right 20px center no-repeat rgba(0, 0, 0, 1);
   color: white;
-  outline: 2px solid rgba(255, 255, 255, 0.10);
+  outline: 2px solid rgba(255, 255, 255, 0.1);
   transition: outline 0.12s ease-in-out;
+  box-shadow:  0 0 40px 10px rgba(0, 0, 0, 0.25);
 }
 
 .mainInput:focus {
