@@ -1,6 +1,6 @@
 import styles from '@/styles/Home.module.css'
 import Head from 'next/head'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Exo_2 } from 'next/font/google'
 import AstroHuntLogo from '@/components/AstrohuntLogo'
 
@@ -9,14 +9,56 @@ const exo = Exo_2({
   subsets: ['latin']
  })
 
+const questionsAndAnswers = [
+  {
+    question: 'Galaksimizin adı nedir?',
+    answers: [
+      'hanifi tokgözoğlu',
+      'Hanifi Tokgözoğlu',
+      'hanifi tokgozoglu',
+      'Hanifi Tokgozoglu',
+      'Hanifi tokgozoglu',
+      'hanifi Tokgozoglu',
+    ],
+    placeholder: 'Cevabini buraya yaz...'
+  },
+  {
+    question: 'İşçi dostuyum, anahtarım ve bir sistemim var. Kaç yaşındayım?',
+    answers: [
+      '21'
+    ],
+    placeholder: 'Sadece sayıyla cevap ver...'
+  }
+]
+
+
 
 export default function Home() {
 
   const mainInputRef = useRef(null)
+  const [activeQuestion, setActiveQuestion] = useState(0);
+
+  const [formClassName, setFormClassName] = useState('');
+  const [inputText, setInputText] = useState('');
+  
 
   useEffect(() => {
     mainInputRef.current.focus()
   }, [])
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    const answer = mainInputRef.current.value;
+    if (questionsAndAnswers[activeQuestion].answers.includes(answer)) {
+      setActiveQuestion(activeQuestion + 1)
+    } else {
+      setInputText('')
+      setFormClassName(styles.error)
+      setTimeout(() => {
+        setFormClassName('')
+      }, 500)
+    }
+  }
 
   return (
     <>
@@ -29,15 +71,24 @@ export default function Home() {
       <main className={styles.main}>
         <header className={styles.header}>
           <AstroHuntLogo className={styles.logo} />
+          <p className={styles.level}>
+            <span className={[styles.questionNumber, exo.className].join(' ')}
+            >QUESTION {activeQuestion + 1} / {questionsAndAnswers.length}</span>
+          </p>
         </header>
         <div className={styles.center}>
           <h1 className={styles.question}>
-            <span className={exo.className}>Galaksimizin adı nedir?</span> 
+            <span className={exo.className}>{questionsAndAnswers[activeQuestion].question}</span>
           </h1>
+          <form onSubmit={handleSubmit} className={[styles.form, formClassName].join(' ')}>
             <input className={styles.mainInput} 
             autoFocus={true}
             ref={mainInputRef}
-            placeholder="Type your answer here..."/>
+            type="text"
+            value={inputText}
+            onChange={(e) => setInputText(e.target.value)}
+            placeholder={questionsAndAnswers[activeQuestion].placeholder} />
+          </form>
         </div>
         <footer className={styles.footer}></footer>
       </main>

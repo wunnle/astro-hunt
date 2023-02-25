@@ -28,11 +28,11 @@
   width: 140px;
 }
 
-.code {
-  font-weight: 700;
-  font-family: var(--font-mono);
+.level {
+  margin-left: auto;
+  color: rgba(255, 255, 255, 0.8);
+  padding-right: 20px;
 }
-
 
 .question {
   font-size: 2.3em;
@@ -40,6 +40,9 @@
   margin-bottom: 0.5rem;
   color: white;
   margin-bottom: 32px;
+  width: 600px;
+  max-width: 100%;
+  text-align: left;
 }
 
 .center {
@@ -180,7 +183,8 @@
 
 .mainInput {
   height: 70px;
-  width: 500px;
+  width: 600px;
+  max-width: 100%;
   font-size: 17px;
   font-weight: 500;
   border-radius: 12px;
@@ -197,4 +201,15 @@
   background: url('../public/enter.svg') right 20px center no-repeat rgba(0, 0, 0, 1);
   background-size: 30px;
   outline-color: rgba(255, 255, 255, 0.50);
+}
+
+@keyframes shake {
+  0% { margin-left: 0rem; }
+  25% { margin-left: 2rem; }
+  75% { margin-left: -2rem; }
+  100% { margin-left: 0rem; }
+}
+
+.error {
+  animation: shake 0.18s ease-in-out 0s 2;
 }
