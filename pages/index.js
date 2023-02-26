@@ -20,7 +20,7 @@ const questionsAndAnswers = [
       'Hanifi tokgozoglu',
       'hanifi Tokgozoglu',
     ],
-    placeholder: 'Cevabini buraya yaz...'
+    placeholder: 'Cevabını buraya yaz...'
   },
   {
     question: 'İşçi dostuyum, anahtarım ve bir sistemim var. Kaç yaşındayım?',
