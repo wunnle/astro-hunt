@@ -11,6 +11,19 @@ const exo = Exo_2({
 
 const questionsAndAnswers = [
   {
+    question: `Oye sésata, keting nem biggest beltalowda seteshang?`,
+    answerType: 'text',
+    answers: [
+      'Eros',
+      'eros',
+      'EROS',
+      'Eros Station',
+      'eros station',
+      'Eros station' 
+    ],
+    placeholder: 'Sasa ke?'
+  },
+  {
     question: 'Galaksimizin adı nedir?',
     answerType: 'text',
     answers: [
