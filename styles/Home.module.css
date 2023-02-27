@@ -3,13 +3,18 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
+  padding: 15px;
   min-height: 100vh;
   background: linear-gradient(
     to bottom,
     rgba(var(--background-start-rgb), 0.8),
     rgba(var(--callout-rgb), 0.5)
   ), url(../public/space-bg.jpg) no-repeat center center fixed;
+}
+
+.form {
+  max-width: 100%;
+  opacity: 1;
 }
 
 .header {
@@ -44,6 +49,18 @@
   max-width: 100%;
   text-align: left;
   filter: drop-shadow(0 0 0.1rem #ffffff70);
+  height: 100px;
+  align-items: flex-end;
+  display: flex;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .center {
@@ -58,6 +75,7 @@
 
 .form {
   max-width: 100%;
+  opacity: 1;
 }
 
 /* Enable hover only on non-touch devices */
@@ -190,7 +208,7 @@
   font-size: 17px;
   font-weight: 500;
   border-radius: 12px;
-  padding: 12px 20px;
+  padding: 12px 18px;
   border: none;
   background: right 20px center no-repeat rgba(0, 0, 0, 1);
   color: white;
@@ -216,4 +234,13 @@
 
 .error {
   animation: shake 0.18s ease-in-out 0s 2;
+}
+
+.form.invisible, .question.invisible {
+  opacity: 0;
+}
+
+.form.visible, .question.visible {
+  opacity: 1;
+  transition: opacity 3s cubic-bezier(0, 1.45, 1, 1);
 }

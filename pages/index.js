@@ -26,7 +26,7 @@ const questionsAndAnswers = [
       'Ceres Station',
       'ceres station',
     ],
-    placeholder: 'Seteshang im "statión" da inyalowda, sasa ke?'
+    placeholder: 'Seteshang im "statión", sa-sa ke?'
   },
   {
     question: 'Galaksimizin adı nedir?',
@@ -59,7 +59,9 @@ export default function Home() {
   const mainInputRef = useRef(null)
   const [activeQuestion, setActiveQuestion] = useState(0);
 
-  const [formClassName, setFormClassName] = useState('');
+  const [formClassName, setFormClassName] = useState(styles.visible);
+  const [questionClassName, setQuestionClassName] = useState(styles.visible);
+  
   const [inputText, setInputText] = useState('');
   
 
@@ -71,6 +73,12 @@ export default function Home() {
     setActiveQuestion(activeQuestion + 1);
     setInputText('');
     mainInputRef.current.blur();
+    setFormClassName(styles.invisible);
+    setQuestionClassName(styles.invisible);
+    setTimeout(() => {
+      setFormClassName(styles.visible);
+      setQuestionClassName(styles.visible);
+    }, 100)
   }
 
   function showErrorMessage() {
@@ -120,7 +128,7 @@ export default function Home() {
           </p>
         </header>
         <div className={styles.center}>
-          <h1 className={styles.question}>
+          <h1 className={[styles.question, questionClassName].join(' ')}>
             <span className={exo.className}>{questionsAndAnswers[activeQuestion].question}</span>
           </h1>
           <form onSubmit={handleSubmit} className={[styles.form, formClassName].join(' ')}>
