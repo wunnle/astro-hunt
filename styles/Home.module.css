@@ -9,7 +9,7 @@
     to bottom,
     rgba(var(--background-start-rgb), 0.8),
     rgba(var(--callout-rgb), 0.5)
-  ), url(/_next/static/media/space-bg.60132f90.jpg) no-repeat center center fixed;
+  ), url(../public/space-bg.jpg) no-repeat center center fixed;
 }
 
 .header {
