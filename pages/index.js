@@ -12,6 +12,7 @@ const exo = Exo_2({
 const questionsAndAnswers = [
   {
     question: 'Galaksimizin adı nedir?',
+    answerType: 'text',
     answers: [
       'hanifi tokgözoğlu',
       'Hanifi Tokgözoğlu',
@@ -24,9 +25,11 @@ const questionsAndAnswers = [
   },
   {
     question: 'İşçi dostuyum, anahtarım ve bir sistemim var. Kaç yaşındayım?',
-    answers: [
-      '21'
-    ],
+    answerType: 'number',
+    answerRange: {
+      min: 4500000000,
+      max: 4603000000
+    },
     placeholder: 'Sadece sayıyla cevap ver...'
   }
 ]
@@ -46,17 +49,39 @@ export default function Home() {
     mainInputRef.current.focus()
   }, [])
 
+  function switchToNextQuestion() {
+    setActiveQuestion(activeQuestion + 1);
+    setInputText('');
+    mainInputRef.current.blur();
+  }
+
+  function showErrorMessage() {
+    setInputText('')
+    setFormClassName(styles.error)
+    setTimeout(() => {
+      setFormClassName('')
+    }, 500)
+  }
+
   function handleSubmit(e) {
     e.preventDefault();
     const answer = mainInputRef.current.value;
-    if (questionsAndAnswers[activeQuestion].answers.includes(answer)) {
-      setActiveQuestion(activeQuestion + 1)
-    } else {
-      setInputText('')
-      setFormClassName(styles.error)
-      setTimeout(() => {
-        setFormClassName('')
-      }, 500)
+
+    if (questionsAndAnswers[activeQuestion].answerType === 'number') {
+      const answerNumber = Number(answer);
+      if (answerNumber >= questionsAndAnswers[activeQuestion].answerRange.min && answerNumber <= questionsAndAnswers[activeQuestion].answerRange.max) {
+        switchToNextQuestion();
+      } else {
+        showErrorMessage();
+      }
+    }
+
+    if(questionsAndAnswers[activeQuestion].answerType === 'text') {
+      if(questionsAndAnswers[activeQuestion].answers.includes(answer)) {
+        switchToNextQuestion();
+      } else {
+        showErrorMessage();
+      }
     }
   }
 
