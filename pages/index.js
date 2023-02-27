@@ -11,7 +11,7 @@ const exo = Exo_2({
 
 const questionsAndAnswers = [
   {
-    question: `Oye sésata, keting nem biggest beltalowda seteshang?`,
+    question: `Oye sésata, keting nem datugut beltalowda seteshang?`,
     answerType: 'text',
     answers: [
       'Eros',
@@ -26,7 +26,7 @@ const questionsAndAnswers = [
       'Ceres Station',
       'ceres station',
     ],
-    placeholder: 'Sasa ke?'
+    placeholder: 'Seteshang im "statión" da inyalowda, sasa ke?'
   },
   {
     question: 'Galaksimizin adı nedir?',
