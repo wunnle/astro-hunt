@@ -19,7 +19,12 @@ const questionsAndAnswers = [
       'EROS',
       'Eros Station',
       'eros station',
-      'Eros station' 
+      'Eros station',
+      'ceres',
+      'Ceres',
+      'CERES',
+      'Ceres Station',
+      'ceres station',
     ],
     placeholder: 'Sasa ke?'
   },
@@ -90,7 +95,7 @@ export default function Home() {
     }
 
     if(questionsAndAnswers[activeQuestion].answerType === 'text') {
-      if(questionsAndAnswers[activeQuestion].answers.includes(answer)) {
+      if(questionsAndAnswers[activeQuestion].answers.includes(answer.trim())) {
         switchToNextQuestion();
       } else {
         showErrorMessage();
