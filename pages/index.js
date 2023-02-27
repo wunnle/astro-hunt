@@ -11,7 +11,7 @@ const exo = Exo_2({
 
 const questionsAndAnswers = [
   {
-    question: `Oye sésata, keting nem datugut beltalowda seteshang?`,
+    question: `Oye sésata, keting im da nem fo mosh bik beltalowda seteshang?`,
     answerType: 'text',
     answers: [
       'Eros',
