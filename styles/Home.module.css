@@ -27,6 +27,16 @@
 
 .footer {
   height: 140px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding: 5px 10px;
+  width: 100%;
+}
+
+.footerInner {
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 15px;
 }
 
 .logo {

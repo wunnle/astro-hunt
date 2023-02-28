@@ -39,7 +39,7 @@ const questionsAndAnswers = [
       'Hanifi tokgozoglu',
       'hanifi Tokgozoglu',
     ],
-    placeholder: 'Cevabını buraya yaz...'
+    placeholder: 'Iki kelime, hayli yerli...'
   },
   {
     question: 'İşçi dostuyum, anahtarım ve bir sistemim var. Kaç yaşındayım?',
@@ -51,7 +51,7 @@ const questionsAndAnswers = [
     placeholder: 'Sadece sayıyla cevap ver...'
   },
   {
-    question: 'Uzay tersaneleriyle meşhur, güneş sistemindeki en yüksek dağa sahip kutle?',
+    question: 'Uzay tersaneleriyle meşhur, güneş sistemindeki en yüksek dağa sahip kütlenin adı nedir?',
     answerType: 'text',
     answers: [
       "Vesta",
@@ -162,7 +162,12 @@ export default function Home() {
             <button className={styles.submitButton}></button>
           </form>
         </div>
-        <footer className={styles.footer}></footer>
+        <footer className={styles.footer}>
+          <div className={[styles.footerInner, exo.className].join(' ')}>
+          Coded with ♥ for Başak - 2023 
+          </div>
+          
+          </footer>
       </main>
     </>
   )
