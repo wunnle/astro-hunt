@@ -46,9 +46,22 @@ const questionsAndAnswers = [
     answerType: 'number',
     answerRange: {
       min: 4500000000,
-      max: 4603000000
+      max: 5000000000
     },
     placeholder: 'Sadece sayıyla cevap ver...'
+  },
+  {
+    question: 'Uzay tersaneleriyle meşhur, güneş sistemindeki en yüksek dağa sahip kutle?',
+    answerType: 'text',
+    answers: [
+      "Vesta",
+      "vesta",
+      "4 Vesta",
+      "4 vesta",
+      "4 Vesta",
+      "VESTA"
+    ],
+    placeholder: 'Titanyum uretimini de arttirdigi soylenir...'
   }
 ]
 
@@ -63,7 +76,13 @@ export default function Home() {
   const [questionClassName, setQuestionClassName] = useState(styles.visible);
   
   const [inputText, setInputText] = useState('');
-  
+
+
+  useEffect(() => {
+    if ("virtualKeyboard" in navigator) {
+      navigator.virtualKeyboard.overlaysContent = false;
+    }
+  }, [])
 
   useEffect(() => {
     mainInputRef.current.focus()
@@ -78,6 +97,7 @@ export default function Home() {
     setTimeout(() => {
       setFormClassName(styles.visible);
       setQuestionClassName(styles.visible);
+      mainInputRef.current.focus();
     }, 100)
   }
 
@@ -139,6 +159,7 @@ export default function Home() {
             value={inputText}
             onChange={(e) => setInputText(e.target.value)}
             placeholder={questionsAndAnswers[activeQuestion].placeholder} />
+            <button className={styles.submitButton}></button>
           </form>
         </div>
         <footer className={styles.footer}></footer>
