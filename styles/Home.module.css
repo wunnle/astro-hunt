@@ -42,6 +42,7 @@
 .logo {
   height: 32px;
   width: 116px;
+  filter:  drop-shadow(0 0 0.3rem #ffffff70);
 }
 
 .level {
@@ -112,8 +113,18 @@
 
 /* Mobile */
 @media (max-width: 700px) {
+
+
+  .question {
+    font-size: 1.9em;
+  }
+
+  .main {
+    padding: 8px;
+  }
+
   .content {
-    padding: 4rem;
+    padding: 2rem;
   }
 
   .grid {
@@ -194,13 +205,6 @@
   }
 }
 
-@media (prefers-color-scheme: dark) {
-  .logo,
-  .thirteen img {
-    filter:  drop-shadow(0 0 0.3rem #ffffff70);
-  }
-}
-
 @keyframes rotate {
   from {
     transform: rotate(360deg);
@@ -274,4 +278,125 @@
 .form.visible, .question.visible {
   opacity: 1;
   transition: opacity 3s cubic-bezier(0, 1.45, 1, 1);
+}
+
+
+@keyframes pop {
+  0% {
+    transform: translateY(200%) scale(0.6);
+    opacity: 0;
+    box-shadow:  0 0 60px 20px rgba(0, 0, 0, 0.25);
+
+  }
+  20% {
+    transform: translateY(50%) scale(0.8);
+    opacity: 0.35;
+  }
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+    box-shadow:  0 0 60px 20px rgba(0, 0, 0, 0.45);
+
+  }
+}
+
+
+.notification {
+  height: 90px;
+  width: 650px;
+  max-width: 100%;
+  border-radius: 12px;
+  border: none;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  transition: border 0.12s ease-in-out;
+  box-shadow:  0 0 60px 20px rgba(0, 0, 0, 0.45);
+  filter: drop-shadow(0 0 0.3rem  rgba(0, 0, 0, 0.25));
+  display: flex;
+  background-position: right 20px center;
+  background-repeat: no-repeat;
+  background-color: rgba(0, 0, 0, 1);
+  background-size: 30px;
+  border-color: rgba(255, 255, 255, 0.80);
+  align-items: center;
+  animation: pop 0.25s cubic-bezier(0.24, 0.85, 0.58, 1);
+  animation-fill-mode: forwards;
+}
+
+.notificationText {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-bottom: 3px;
+}
+
+.notificationTitle {
+  font-size: 1.4em;
+  margin-bottom: 5px;
+}
+
+.notificationDescription {
+  font-size: 0.95em;
+  opacity: 0.65;
+  font-weight: normal;
+}
+
+.notificationIcon {
+  width: 90px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stepIcon {
+  width: 56px;
+  height: 56px;
+  display: block;
+}
+
+.notificationButton {
+  border: none;
+  border-left: 1px solid rgba(255, 255, 255, 0.35);
+  width: 100px;
+  height: 100%;
+  background: none;
+  margin-left: auto;
+  font-size: 15px;
+}
+
+.notificationButton:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+}
+
+/* Mobile */
+@media (max-width: 700px) {
+
+  .notification {
+    flex-direction: column;
+    height: auto;
+    padding-top: 20px;
+  }
+
+  .notificationButton {
+    border-top: 1px solid white;
+    border-left: none;
+    width: 100%;
+    height: 50px;
+  }
+
+  .notificationText {
+    padding: 20px 14px;
+  }
+
+  .notificationTitle {
+    font-size: 1.2em;
+  }
+
+  .notificationDescription {
+    font-size: 0.9em;
+  }
+
+
 }

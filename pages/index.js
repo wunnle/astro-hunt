@@ -3,14 +3,17 @@ import Head from 'next/head'
 import { useEffect, useRef, useState } from 'react'
 import { Exo_2 } from 'next/font/google'
 import AstroHuntLogo from '@/components/AstrohuntLogo'
+import SurpriseIcon from '@/components/SurpriseIcon'
+import EventIcon from '@/components/EventIcon'
 
 const exo = Exo_2({ 
-  weight: ['400'],
+  weight: ['300', '400'],
   subsets: ['latin']
  })
 
-const questionsAndAnswers = [
+const steps = [
   {
+    type: 'question',
     question: `Oye sésata, keting im da nem fo mosh bik beltalowda seteshang?`,
     answerType: 'text',
     answers: [
@@ -29,6 +32,7 @@ const questionsAndAnswers = [
     placeholder: 'Seteshang im "statión", sa-sa ke?'
   },
   {
+    type: 'question',
     question: 'Galaksimizin adı nedir?',
     answerType: 'text',
     answers: [
@@ -42,6 +46,7 @@ const questionsAndAnswers = [
     placeholder: 'Iki kelime, hayli yerli...'
   },
   {
+    type: 'question',
     question: 'İşçi dostuyum, anahtarım ve bir sistemim var. Kaç yaşındayım?',
     answerType: 'number',
     answerRange: {
@@ -51,6 +56,7 @@ const questionsAndAnswers = [
     placeholder: 'Sadece sayıyla cevap ver...'
   },
   {
+    type: 'question',
     question: 'Uzay tersaneleriyle meşhur, güneş sistemindeki en yüksek dağa sahip kütlenin adı nedir?',
     answerType: 'text',
     answers: [
@@ -62,7 +68,46 @@ const questionsAndAnswers = [
       "VESTA"
     ],
     placeholder: 'Titanyum uretimini de arttirdigi soylenir...'
-  }
+  },
+  {
+    type: 'question',
+    question: "What's the name of  the system unpredictably cycles between stable and chaotic eras?",
+    answerType: 'text',
+    answers: [
+      "Alpha Centauri",
+      "alpha centauri",
+      "Trisolaris",
+      "trisolaris"
+    ],
+    placeholder: 'There is also a VR game about it...'
+  },
+  { 
+    type: 'notification',
+    title: `You've unlocked a mysterious gift!`,
+    description: "Find it behind the Terraforming Mars box and click continue.",
+    buttonText: 'Continue',
+    icon: SurpriseIcon
+  },
+  {
+    type: 'question',
+    question: "Bonus queston: Lorem ipsum dolor sit amet?",
+    answerType: 'text',
+    answers: [
+      "Lambda",
+      "lambda",
+      "LAMBDA",
+      "Λ",
+      "λ",
+    ],
+    placeholder: 'There is also a VR game about it...'
+  },
+  { 
+    type: 'notification',
+    title: `You've unlocked an event invite!`,
+    description: "Download it and make sure you show up.",
+    buttonText: 'Download',
+    icon: EventIcon
+  },
 ]
 
 
@@ -70,7 +115,7 @@ const questionsAndAnswers = [
 export default function Home() {
 
   const mainInputRef = useRef(null)
-  const [activeQuestion, setActiveQuestion] = useState(0);
+  const [activeStep, setActiveStep] = useState(0);
 
   const [formClassName, setFormClassName] = useState(styles.visible);
   const [questionClassName, setQuestionClassName] = useState(styles.visible);
@@ -85,19 +130,19 @@ export default function Home() {
   }, [])
 
   useEffect(() => {
-    mainInputRef.current.focus()
+    mainInputRef.current?.focus()
   }, [])
 
   function switchToNextQuestion() {
-    setActiveQuestion(activeQuestion + 1);
+    setActiveStep(activeStep + 1);
     setInputText('');
-    mainInputRef.current.blur();
+    mainInputRef.current?.blur();
     setFormClassName(styles.invisible);
     setQuestionClassName(styles.invisible);
     setTimeout(() => {
       setFormClassName(styles.visible);
       setQuestionClassName(styles.visible);
-      mainInputRef.current.focus();
+      mainInputRef.current?.focus();
     }, 100)
   }
 
@@ -113,23 +158,25 @@ export default function Home() {
     e.preventDefault();
     const answer = mainInputRef.current.value;
 
-    if (questionsAndAnswers[activeQuestion].answerType === 'number') {
+    if (steps[activeStep].answerType === 'number') {
       const answerNumber = Number(answer);
-      if (answerNumber >= questionsAndAnswers[activeQuestion].answerRange.min && answerNumber <= questionsAndAnswers[activeQuestion].answerRange.max) {
+      if (answerNumber >= steps[activeStep].answerRange.min && answerNumber <= steps[activeStep].answerRange.max) {
         switchToNextQuestion();
       } else {
         showErrorMessage();
       }
     }
 
-    if(questionsAndAnswers[activeQuestion].answerType === 'text') {
-      if(questionsAndAnswers[activeQuestion].answers.includes(answer.trim())) {
+    if(steps[activeStep].answerType === 'text') {
+      if(steps[activeStep].answers.includes(answer.trim())) {
         switchToNextQuestion();
       } else {
         showErrorMessage();
       }
     }
   }
+
+  const StepIcon = steps[activeStep]?.icon;
 
   return (
     <>
@@ -144,12 +191,13 @@ export default function Home() {
           <AstroHuntLogo className={styles.logo} />
           <p className={styles.level}>
             <span className={[styles.questionNumber, exo.className].join(' ')}
-            >QUESTION {activeQuestion + 1} / {questionsAndAnswers.length}</span>
+            >STEP {activeStep + 1} / {steps.length}</span>
           </p>
         </header>
+        {steps[activeStep].type === 'question' && (
         <div className={styles.center}>
           <h1 className={[styles.question, questionClassName].join(' ')}>
-            <span className={exo.className}>{questionsAndAnswers[activeQuestion].question}</span>
+            <span className={exo.className}>{steps[activeStep].question}</span>
           </h1>
           <form onSubmit={handleSubmit} className={[styles.form, formClassName].join(' ')}>
             <input className={styles.mainInput} 
@@ -158,10 +206,27 @@ export default function Home() {
             type="text"
             value={inputText}
             onChange={(e) => setInputText(e.target.value)}
-            placeholder={questionsAndAnswers[activeQuestion].placeholder} />
+            placeholder={steps[activeStep].placeholder} />
             <button className={styles.submitButton}></button>
           </form>
-        </div>
+        </div>)}
+        {steps[activeStep].type === 'notification' && (
+          <div className={styles.center}>
+            <div className={styles.notification}>
+              <div className={styles.notificationIcon}>
+                <StepIcon className={styles.stepIcon} />
+              </div>
+              <div className={styles.notificationText}>
+
+              <h1 className={[styles.notificationTitle, exo.className].join(' ')}>{steps[activeStep].title}</h1>
+              <p className={[styles.notificationDescription, exo.className].join(' ')}>{steps[activeStep].description}</p>
+              </div>
+              <button className={[styles.notificationButton, exo.className].join(' ')} onClick={switchToNextQuestion}>
+                {steps[activeStep].buttonText}
+              </button>
+            </div>
+          </div>
+        )}
         <footer className={styles.footer}>
           <div className={[styles.footerInner, exo.className].join(' ')}>
           Coded with ♥ for Başak - 2023 
