@@ -174,7 +174,7 @@ export default function Home() {
 
   function downloadInvite() {
     console.log("downloading invite")
-    window.open("data:text/calendar;charset=utf8" + encodeURIComponent(inviteIcs));
+    window.open("data:text/calendar;charset=utf8" + encodeURI(inviteIcs));
   }
 
   const StepIcon = steps[activeStep]?.icon;
