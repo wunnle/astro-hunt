@@ -7,7 +7,6 @@ import SurpriseIcon from '@/components/SurpriseIcon'
 import EventIcon from '@/components/EventIcon'
 import DownloadIcon from '@/components/DownloadIcon'
 import CheckIcon from '@/components/CheckIcon'
-import inviteIcs from '@/constants/inviteIcs'
 
 const exo = Exo_2({ 
   weight: ['300', '400'],
@@ -33,21 +32,6 @@ const steps = [
       'ceres station',
     ],
     placeholder: 'Seteshang im "statión", sa-sa ke?'
-  },
-  { 
-    type: 'notification',
-    title: `You've unlocked your gift!`,
-    description: <>Find it behind Terraforming Mars and click {" "}<CheckIcon style={{ width: 18, height: 18, marginLeft: 2  }} /></>,
-    action: 'goToNextStep',
-    icon: SurpriseIcon
-  },
-  { 
-    type: 'notification',
-    title: `You've unlocked an event invite!`,
-    description: "Download it and make sure you show up.",
-    buttonText: 'Download',
-    action: 'downloadInvite',
-    icon: EventIcon
   },
   {
     type: 'question',
@@ -99,6 +83,13 @@ const steps = [
     ],
     placeholder: 'There is also a VR game about it...'
   },
+  { 
+    type: 'notification',
+    title: `You've unlocked your gift!`,
+    description: <>Find it behind Terraforming Mars and click {" "}<CheckIcon style={{ width: 18, height: 18, marginLeft: 2  }} /></>,
+    action: 'goToNextStep',
+    icon: SurpriseIcon
+  },
   {
     type: 'question',
     question: "Bonus queston: Lorem ipsum dolor sit amet?",
@@ -111,7 +102,15 @@ const steps = [
       "λ",
     ],
     placeholder: 'There is also a VR game about it...'
-  }
+  },
+  { 
+    type: 'notification',
+    title: `You've unlocked an event invite!`,
+    description: "Download it and make sure you show up.",
+    buttonText: 'Download',
+    action: 'downloadInvite',
+    icon: EventIcon
+  },
 ]
 
 
@@ -172,11 +171,6 @@ export default function Home() {
     }
   }
 
-  function downloadInvite() {
-    console.log("downloading invite")
-    window.open("data:text/calendar;charset=utf8" + encodeURI(inviteIcs));
-  }
-
   const StepIcon = steps[activeStep]?.icon;
 
   return (
@@ -231,9 +225,9 @@ export default function Home() {
               }
               {
                 steps[activeStep].action === "downloadInvite" && (
-                  <button className={[styles.notificationButton, exo.className].join(' ')} onClick={() => downloadInvite()}>
+                  <a download href='/astroInvite.ics' className={[styles.notificationButton, exo.className].join(' ')} >
                   <DownloadIcon style={{ width: 32, heigth: 32 }} />
-                </button>
+                </a>
                 )
               }
             </div>

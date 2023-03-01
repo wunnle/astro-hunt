@@ -392,14 +392,7 @@
   .notificationIcon {
     display: none;
   }
-
-  .notificationButton {
-    /* border-top: 1px solid white;
-    border-left: none;
-    width: 100%;
-    height: 50px; */
-  }
-
+  
   .notificationText {
     padding-left: 14px;
     /* padding: 20px 14px; */
