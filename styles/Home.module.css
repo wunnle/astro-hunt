@@ -302,8 +302,8 @@
 
 
 .notification {
-  height: 90px;
-  width: 650px;
+  height: 84px;
+  width: 600px;
   max-width: 100%;
   border-radius: 12px;
   border: none;
@@ -328,6 +328,7 @@
   flex-direction: column;
   justify-content: center;
   padding-bottom: 3px;
+  color: white;
 }
 
 .notificationTitle {
@@ -338,6 +339,8 @@
 .notificationDescription {
   font-size: 0.95em;
   opacity: 0.65;
+  display: flex;
+  align-items: flex-end;
   font-weight: normal;
 }
 
@@ -357,17 +360,25 @@
 
 .notificationButton {
   border: none;
-  border-left: 1px solid rgba(255, 255, 255, 0.35);
-  width: 100px;
+  border-left: 2px solid rgba(255, 255, 255, 0.35);
+  width: 70px;
   height: 100%;
   background: none;
   margin-left: auto;
   font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .notificationButton:hover {
   background-color: rgba(255, 255, 255, 0.1);
   cursor: pointer;
+}
+
+.downloadIcon, .checkIcon {
+  width: 32px;
+  height: 32px;
 }
 
 /* Mobile */

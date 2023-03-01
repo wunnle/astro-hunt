@@ -5,6 +5,9 @@ import { Exo_2 } from 'next/font/google'
 import AstroHuntLogo from '@/components/AstrohuntLogo'
 import SurpriseIcon from '@/components/SurpriseIcon'
 import EventIcon from '@/components/EventIcon'
+import DownloadIcon from '@/components/DownloadIcon'
+import CheckIcon from '@/components/CheckIcon'
+import inviteIcs from '@/constants/inviteIcs'
 
 const exo = Exo_2({ 
   weight: ['300', '400'],
@@ -30,6 +33,21 @@ const steps = [
       'ceres station',
     ],
     placeholder: 'Seteshang im "statión", sa-sa ke?'
+  },
+  { 
+    type: 'notification',
+    title: `You've unlocked your gift!`,
+    description: <>Find it behind Terraforming Mars and click {" "}<CheckIcon style={{ width: 18, height: 18, marginLeft: 2  }} /></>,
+    action: 'goToNextStep',
+    icon: SurpriseIcon
+  },
+  { 
+    type: 'notification',
+    title: `You've unlocked an event invite!`,
+    description: "Download it and make sure you show up.",
+    buttonText: 'Download',
+    action: 'downloadInvite',
+    icon: EventIcon
   },
   {
     type: 'question',
@@ -81,13 +99,6 @@ const steps = [
     ],
     placeholder: 'There is also a VR game about it...'
   },
-  { 
-    type: 'notification',
-    title: `You've unlocked a mysterious gift!`,
-    description: "Find it behind the Terraforming Mars box and click continue.",
-    buttonText: 'Continue',
-    icon: SurpriseIcon
-  },
   {
     type: 'question',
     question: "Bonus queston: Lorem ipsum dolor sit amet?",
@@ -100,16 +111,8 @@ const steps = [
       "λ",
     ],
     placeholder: 'There is also a VR game about it...'
-  },
-  { 
-    type: 'notification',
-    title: `You've unlocked an event invite!`,
-    description: "Download it and make sure you show up.",
-    buttonText: 'Download',
-    icon: EventIcon
-  },
+  }
 ]
-
 
 
 export default function Home() {
@@ -121,13 +124,6 @@ export default function Home() {
   const [questionClassName, setQuestionClassName] = useState(styles.visible);
   
   const [inputText, setInputText] = useState('');
-
-
-  useEffect(() => {
-    if ("virtualKeyboard" in navigator) {
-      navigator.virtualKeyboard.overlaysContent = false;
-    }
-  }, [])
 
   useEffect(() => {
     mainInputRef.current?.focus()
@@ -176,6 +172,11 @@ export default function Home() {
     }
   }
 
+  function downloadInvite() {
+    console.log("downloading invite")
+    window.open("data:text/calendar;charset=utf8" + encodeURIComponent(inviteIcs));
+  }
+
   const StepIcon = steps[activeStep]?.icon;
 
   return (
@@ -221,9 +222,20 @@ export default function Home() {
               <h1 className={[styles.notificationTitle, exo.className].join(' ')}>{steps[activeStep].title}</h1>
               <p className={[styles.notificationDescription, exo.className].join(' ')}>{steps[activeStep].description}</p>
               </div>
-              <button className={[styles.notificationButton, exo.className].join(' ')} onClick={switchToNextQuestion}>
-                {steps[activeStep].buttonText}
-              </button>
+              {
+                steps[activeStep].action === "goToNextStep" && (
+                  <button className={[styles.notificationButton, exo.className].join(' ')} onClick={switchToNextQuestion}>
+                  <CheckIcon style={{ width: 32, heigth: 32 }} />
+                </button>
+                )
+              }
+              {
+                steps[activeStep].action === "downloadInvite" && (
+                  <button className={[styles.notificationButton, exo.className].join(' ')} onClick={() => downloadInvite()}>
+                  <DownloadIcon style={{ width: 32, heigth: 32 }} />
+                </button>
+                )
+              }
             </div>
           </div>
         )}
