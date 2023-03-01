@@ -73,6 +73,16 @@ const steps = [
   },
   {
     type: 'question',
+    question: `The deadline for the job is a year away, so I can't procrastinate even one day. Where am I from?`,
+    answerType: 'text',
+    answers: [
+      "Venus",
+      "venus"
+    ],
+    placeholder: 'Gotta go before sun sets in the east...'
+  },
+  {
+    type: 'question',
     question: "What's the name of  the system unpredictably cycles between stable and chaotic eras?",
     answerType: 'text',
     answers: [
