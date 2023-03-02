@@ -45,17 +45,17 @@ const steps = [
       'Hanifi tokgozoglu',
       'hanifi Tokgozoglu',
     ],
-    placeholder: 'Iki kelime, hayli yerli...'
+    placeholder: 'İki kelime, hayli yerli...'
   },
   {
     type: 'question',
-    question: 'İşçi dostuyum, anahtarım ve bir sistemim var. Kaç yaşındayım?',
-    answerType: 'number',
-    answerRange: {
-      min: 4500000000,
-      max: 5000000000
-    },
-    placeholder: 'Sadece sayıyla cevap ver...'
+    question: `The deadline for the job is a year away, so I can't procrastinate even one day. Where am I from?`,
+    answerType: 'text',
+    answers: [
+      "Venus",
+      "venus"
+    ],
+    placeholder: 'Gotta go before sun sets in the east...'
   },
   {
     type: 'question',
@@ -69,17 +69,7 @@ const steps = [
       "4 Vesta",
       "VESTA"
     ],
-    placeholder: 'Titanyum uretimini de arttirdigi soylenir...'
-  },
-  {
-    type: 'question',
-    question: `The deadline for the job is a year away, so I can't procrastinate even one day. Where am I from?`,
-    answerType: 'text',
-    answers: [
-      "Venus",
-      "venus"
-    ],
-    placeholder: 'Gotta go before sun sets in the east...'
+    placeholder: 'Titanyum üretimini de arttırdığı söylenir...'
   },
   {
     type: 'question',
@@ -95,23 +85,20 @@ const steps = [
   },
   { 
     type: 'notification',
-    title: `You've unlocked your gift!`,
-    description: <>Find it behind Terraforming Mars and click {" "}<CheckIcon style={{ width: 18, height: 18, marginLeft: 2  }} /></>,
+    title: `Good job! You've unlocked your gift`,
+    description: 'Find it behind the Terraforming Mars box',
     action: 'goToNextStep',
     icon: SurpriseIcon
   },
   {
     type: 'question',
-    question: "Bonus queston: Lorem ipsum dolor sit amet?",
-    answerType: 'text',
-    answers: [
-      "Lambda",
-      "lambda",
-      "LAMBDA",
-      "Λ",
-      "λ",
-    ],
-    placeholder: 'There is also a VR game about it...'
+    question: 'İşçi dostuyum, anahtarım ve bir sistemim var. Kaç yaşındayım?',
+    answerType: 'number',
+    answerRange: {
+      min: 4500000000,
+      max: 5000000000
+    },
+    placeholder: 'Sadece sayıyla cevap ver...'
   },
   { 
     type: 'notification',
